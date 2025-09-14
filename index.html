@@ -89,7 +89,7 @@
             font-size: 1.5em;
         }
 
-        .prizes-grid {
+        .main-prizes {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 15px;
@@ -107,6 +107,12 @@
 
         .prize-item:hover {
             transform: translateY(-5px);
+        }
+
+        .prize-item.highlight {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            border: 2px solid #ff6b6b;
+            font-weight: bold;
         }
 
         .prize-icon {
@@ -127,17 +133,71 @@
             font-style: italic;
         }
 
-        .more-prizes {
-            text-align: center;
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(255, 107, 107, 0.1);
-            border-radius: 8px;
+        .show-all-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 25px auto;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .more-prizes p {
+        .show-all-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .all-prizes {
+            display: none;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid #ecf0f1;
+        }
+
+        .all-prizes.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .all-prizes h4 {
             color: #ff6b6b;
-            font-size: 1.1em;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .all-prizes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .all-prize-item {
+            background: rgba(255, 107, 107, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            color: #333;
+            font-size: 0.9em;
+            transition: transform 0.3s ease;
+        }
+
+        .all-prize-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 107, 107, 0.2);
         }
 
         .purchase-section {
@@ -217,7 +277,7 @@
 
         .payment-button {
             display: inline-block;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            background: linear-gradient(135deg, #2c5aa0, #1e3d72);
             color: white;
             padding: 15px 40px;
             text-decoration: none;
@@ -225,12 +285,12 @@
             font-size: 1.2em;
             font-weight: bold;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(238, 90, 82, 0.4);
+            box-shadow: 0 5px 15px rgba(44, 90, 160, 0.4);
         }
 
         .payment-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(238, 90, 82, 0.6);
+            box-shadow: 0 10px 25px rgba(44, 90, 160, 0.6);
         }
 
         .info-section {
@@ -265,7 +325,11 @@
                 font-size: 1.5em;
             }
 
-            .prizes-grid {
+            .main-prizes {
+                grid-template-columns: 1fr;
+            }
+
+            .all-prizes-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -288,35 +352,76 @@
 
             <!-- SECCIÓN DE PREMIOS -->
             <div class="prizes-section">
-                <h3>🏆 Premios Increíbles</h3>
-                <div class="prizes-grid">
-                    <div class="prize-item">
-                        <span class="prize-icon">💄</span>
-                        <p>Maquillaje social Amalia Prieto <br><small>(@makeupbyamaliap)</small></p>
+                <h3>🏆 Premios</h3>
+                <div class="main-prizes">
+                    <div class="prize-item highlight">
+                        <span class="prize-icon">🍷</span>
+                        <p>Tour para 2 personas por viña Concha y Toro</p>
                     </div>
-                    <div class="prize-item">
-                        <span class="prize-icon">🧘‍♀️</span>
-                        <p>Un mes de clases de yoga online o presencial <br><small>(@sercrisalida.cl)</small></p>
+                    <div class="prize-item highlight">
+                        <span class="prize-icon">🔥</span>
+                        <p>Fogón marca Tentline</p>
                     </div>
-                    <div class="prize-item">
-                        <span class="prize-icon">👗</span>
-                        <p>2 delantales de lino español</p>
+                    <div class="prize-item highlight">
+                        <span class="prize-icon">🍽️</span>
+                        <p>Comida para dos personas en restaurante Tip y Tap <br><small>(Isidora Goyenechea)</small></p>
                     </div>
-                    <div class="prize-item">
+                    <div class="prize-item highlight">
+                        <span class="prize-icon">✨</span>
+                        <p>E5entials set OKWU</p>
+                    </div>
+                    <div class="prize-item highlight">
                         <span class="prize-icon">🦷</span>
-                        <p>Pack atención dental: radiografías, limpieza y blanqueamiento <br><small>(@marfil.dental)</small></p>
+                        <p>Pack de atención dental: limpieza y blanqueamiento dental <br><small>Centro Marfil</small></p>
                     </div>
-                    <div class="prize-item">
-                        <span class="prize-icon">👔</span>
-                        <p>1 camisa marca Piola</p>
-                    </div>
-                    <div class="prize-item">
-                        <span class="prize-icon">🏠</span>
-                        <p>Set de mantelería Reina Casa</p>
+                    <div class="prize-item highlight">
+                        <span class="prize-icon">🥘</span>
+                        <p>Comida para dos personas en restaurante Margó</p>
                     </div>
                 </div>
-                <div class="more-prizes">
-                    <p>✨ <strong>¡Y muchos premios más por confirmar!</strong> ✨</p>
+
+                <button class="show-all-btn" onclick="toggleAllPrizes()">
+                    <span id="toggle-text">Ver todos los premios</span>
+                </button>
+
+                <div class="all-prizes" id="all-prizes">
+                    <h4>🎁 Lista Completa de Premios</h4>
+                    <div class="all-prizes-grid">
+                        <div class="all-prize-item">🎢 2 entradas a Fantasilandia</div>
+                        <div class="all-prize-item">🧥 1 parka Lippi</div>
+                        <div class="all-prize-item">🍽️ 1 set individuales de Pupila Nativa</div>
+                        <div class="all-prize-item">🍷 Tour por viña Concha y Toro</div>
+                        <div class="all-prize-item">💼 Tarjetero más funda PC 100% cuero</div>
+                        <div class="all-prize-item">💼 Tarjetero más funda PC 100% cuero</div>
+                        <div class="all-prize-item">🔥 Fogón marca TentLine</div>
+                        <div class="all-prize-item">👜 Cartera de cuero UMBRALE</div>
+                        <div class="all-prize-item">👜 Cartera de cuero UMBRALE</div>
+                        <div class="all-prize-item">👜 Cartera de cuero UMBRALE</div>
+                        <div class="all-prize-item">👜 Cartera de cuero UMBRALE</div>
+                        <div class="all-prize-item">👜 Cartera de cuero UMBRALE</div>
+                        <div class="all-prize-item">💎 Joya exclusiva AMN · Ana María Navarro</div>
+                        <div class="all-prize-item">🍽️ Comida para dos personas en restaurante Tip y Tap</div>
+                        <div class="all-prize-item">🥘 Comida para dos personas en restaurante Margó</div>
+                        <div class="all-prize-item">💡 Lámpara de diseño Augusta Vial</div>
+                        <div class="all-prize-item">✨ E5entials set OKWU</div>
+                        <div class="all-prize-item">👔 Camisa marca Piola</div>
+                        <div class="all-prize-item">🏠 Set de mantelería Reina Casa</div>
+                        <div class="all-prize-item">💄 Maquillaje social AMALIA PRIETO</div>
+                        <div class="all-prize-item">🧘‍♀️ Mensualidad de yoga online o presencial @Sercrisalida</div>
+                        <div class="all-prize-item">🦷 Pack de atención dental Centro Marfil</div>
+                        <div class="all-prize-item">👜 Cartera cuero Freelosophy</div>
+                        <div class="all-prize-item">📦 Pack Humana</div>
+                        <div class="all-prize-item">🥗 Consulta nutricional online Trinidad Videla</div>
+                        <div class="all-prize-item">👗 2 delantales de lino español para cocina</div>
+                        <div class="all-prize-item">🍼 Botella Norden 710 ml</div>
+                        <div class="all-prize-item">🛏️ Piecera para cama</div>
+                        <div class="all-prize-item">🥤 Can Cooler Fluor Summer · BUBBA</div>
+                        <div class="all-prize-item">🛴 Scooter infantil Harvest</div>
+                        <div class="all-prize-item">👟 Zapatilla mujer Lippi Vulcano (talla 35)</div>
+                        <div class="all-prize-item">👟 Zapatilla adulto Adidas (talla 38,5)</div>
+                        <div class="all-prize-item">⚽ Zapatillas de fútbol ATTACANTO Puma (talla 37)</div>
+                        <div class="all-prize-item">⚽ Zapatillas de fútbol COPA PURE III (talla 42,5)</div>
+                    </div>
                 </div>
             </div>
 
@@ -395,6 +500,19 @@
         function updatePaymentLink(num) {
             // Actualizar el enlace de pago con el número de tickets
             paymentButton.href = `${FLOW_BASE_URL}&tickets=${num}`;
+        }
+
+        function toggleAllPrizes() {
+            const allPrizes = document.getElementById('all-prizes');
+            const toggleText = document.getElementById('toggle-text');
+            
+            if (allPrizes.classList.contains('show')) {
+                allPrizes.classList.remove('show');
+                toggleText.textContent = 'Ver todos los premios';
+            } else {
+                allPrizes.classList.add('show');
+                toggleText.textContent = 'Ocultar premios';
+            }
         }
     </script>
 </body>
